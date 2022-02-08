@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/minha_navegacao">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/minha_navegacao"
+    app:startDestination="@id/cadastroFragment">
 
+    <fragment
+        android:id="@+id/cadastroFragment"
+        android:name="com.example.desafio_android_klever.ui.cadastro.CadastroFragment"
+        android:label="@string/cadastro_titulo"
+        tools:layout="@layout/cadastro_fragment" />
 </navigation>
