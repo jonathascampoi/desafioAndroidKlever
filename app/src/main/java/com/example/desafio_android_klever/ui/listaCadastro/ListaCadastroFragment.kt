@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.desafio_android_klever.R
 import com.example.desafio_android_klever.data.db.AppDatabase
 import com.example.desafio_android_klever.data.db.dao.CadastroDAO
@@ -30,6 +31,7 @@ class ListaCadastroFragment : Fragment(R.layout.lista_cadastro_fragment) {
         super.onViewCreated(view, savedInstanceState)
 
         observeViewModelEvents()
+        configureViewListeners()
     }
 
     private fun observeViewModelEvents() {
@@ -40,6 +42,12 @@ class ListaCadastroFragment : Fragment(R.layout.lista_cadastro_fragment) {
                 setHasFixedSize(true)
                 adapter = listaCadastroAdapter
             }
+        }
+    }
+
+    private fun configureViewListeners(){
+        btn_adicionar.setOnClickListener{
+            findNavController().navigate(R.id.cadastroFragment)
         }
     }
 }

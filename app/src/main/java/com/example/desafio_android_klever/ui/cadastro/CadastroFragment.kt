@@ -2,7 +2,6 @@ package com.example.desafio_android_klever.ui.cadastro
 
 import android.os.Bundle
 import android.view.View
-import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
