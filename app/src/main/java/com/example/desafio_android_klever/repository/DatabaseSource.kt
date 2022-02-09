@@ -31,7 +31,7 @@ class DatabaseSource(private val cadastroDAO: CadastroDAO) : CadastroRepository 
         cadastroDAO.deleteAll()
     }
 
-    override suspend fun getAllCadastro(): LiveData<List<CadastroEntity>> {
+    override fun getAllCadastro(): LiveData<List<CadastroEntity>> {
         return cadastroDAO.getAll()
     }
 }

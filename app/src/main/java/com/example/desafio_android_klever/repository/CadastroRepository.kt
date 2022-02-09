@@ -13,5 +13,5 @@ interface CadastroRepository {
 
     suspend fun deleteAllCadastro()
 
-    suspend fun getAllCadastro(): LiveData<List<CadastroEntity>>
+    fun getAllCadastro(): LiveData<List<CadastroEntity>>
 }
