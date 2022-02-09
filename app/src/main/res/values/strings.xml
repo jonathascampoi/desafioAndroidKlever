@@ -6,4 +6,8 @@
     <string name="cadastro_email_hint">E-mail do Usuario</string>
     <string name="text_btn_criar">Criar</string>
     <string name="cadastro_titulo">Cadastro</string>
+
+    <!-- mensagens -->
+    <string name="cadastro_inserido_sucesso">Cadastro realizado com Sucesso!</string>
+    <string name="cadastro_erro_inserir">Houve um erro ao inserir o Cadastro!</string>
 </resources>
