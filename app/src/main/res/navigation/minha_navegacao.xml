@@ -3,11 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/minha_navegacao"
-    app:startDestination="@id/cadastroFragment">
+    app:startDestination="@id/listaCadastroFragment">
 
     <fragment
         android:id="@+id/cadastroFragment"
         android:name="com.example.desafio_android_klever.ui.cadastro.CadastroFragment"
         android:label="@string/cadastro_titulo"
         tools:layout="@layout/cadastro_fragment" />
+    <fragment
+        android:id="@+id/listaCadastroFragment"
+        android:name="com.example.desafio_android_klever.ui.listaCadastro.ListaCadastroFragment"
+        android:label="ListaCadastroFragment" />
 </navigation>
