@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.desafio_android_klever.R
 import com.example.desafio_android_klever.data.db.AppDatabase
 import com.example.desafio_android_klever.data.db.dao.CadastroDAO
@@ -51,6 +52,8 @@ class CadastroFragment : Fragment(R.layout.cadastro_fragment) {
                 is CadastroViewModel.CadastroState.Inserted -> {
                     limpaTextos()
                     escondeTeclado()
+                    requireView().requestFocus()
+                    findNavController().popBackStack()
                 }
             }
         }

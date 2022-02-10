@@ -46,6 +46,11 @@ class ListaCadastroFragment : Fragment(R.layout.lista_cadastro_fragment) {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.getCadastros()
+    }
+
     private fun configureViewListeners(){
         btn_adicionar.setOnClickListener{
             findNavController().navigateWithAnimations(R.id.cadastroFragment)

@@ -22,5 +22,5 @@ interface CadastroDAO {
     suspend fun deleteAll()
 
     @Query("SELECT * FROM cadastro")
-    fun getAll(): LiveData<List<CadastroEntity>>
+    suspend fun getAll(): List<CadastroEntity>
 }
