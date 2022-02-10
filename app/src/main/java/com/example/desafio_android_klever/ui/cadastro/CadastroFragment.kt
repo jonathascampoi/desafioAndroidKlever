@@ -16,9 +16,7 @@ import com.example.desafio_android_klever.extensions.hideKeyboard
 import com.example.desafio_android_klever.repository.CadastroRepository
 import com.example.desafio_android_klever.repository.DatabaseSource
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.cadastro_fragment.input_email
-import kotlinx.android.synthetic.main.cadastro_fragment.input_name
-import kotlinx.android.synthetic.main.cadastro_fragment.botao_criar
+import kotlinx.android.synthetic.main.cadastro_fragment.*
 
 class CadastroFragment : Fragment(R.layout.cadastro_fragment) {
 
@@ -41,6 +39,8 @@ class CadastroFragment : Fragment(R.layout.cadastro_fragment) {
             botao_criar.text = getString(R.string.text_btn_atualizar)
             input_name.setText(cadastro.nome)
             input_email.setText(cadastro.email)
+
+            botao_deletar.visibility = View.VISIBLE
         }
 
         observeEvents()
@@ -48,26 +48,27 @@ class CadastroFragment : Fragment(R.layout.cadastro_fragment) {
     }
 
     private fun setListners() {
-        botao_criar.setOnClickListener{
+        botao_criar.setOnClickListener {
             val nome = input_name.text.toString()
             val email = input_email.text.toString()
-            
+
             viewModel.adicionaOuAtualizaCadastro(nome, email, args.cadastro?.id ?: 0)
+        }
+
+        botao_deletar.setOnClickListener {
+            viewModel.deletarCadastro(args.cadastro?.id ?: 0)
         }
     }
 
     private fun observeEvents() {
         viewModel.cadastroStateEventData.observe(viewLifecycleOwner) { cadastroState ->
             when (cadastroState) {
-                is CadastroViewModel.CadastroState.Inserted -> {
+                is CadastroViewModel.CadastroState.Inserted ,
+                is CadastroViewModel.CadastroState.Updated,
+                is CadastroViewModel.CadastroState.Deleted,-> {
                     limpaTextos()
                     escondeTeclado()
                     requireView().requestFocus()
-                    findNavController().popBackStack()
-                }
-                is CadastroViewModel.CadastroState.Updated -> {
-                    limpaTextos()
-                    escondeTeclado()
                     findNavController().popBackStack()
                 }
             }

@@ -54,9 +54,23 @@ class CadastroViewModel(private val repository: CadastroRepository) : ViewModel(
         }
     }
 
+    fun deletarCadastro(id: Long) = viewModelScope.launch {
+        try {
+            if (id > 0) {
+                repository.deleteCadastro(id)
+                _cadastroStateEventData.value = CadastroState.Deleted
+                _messageEventData.value = R.string.cadastro_deletado_sucesso
+            }
+        } catch (ex: Exception) {
+            _messageEventData.value = R.string.cadastro_erro_deletar
+            Log.e(TAG, ex.toString())
+        }
+    }
+
     sealed class CadastroState {
         object Inserted : CadastroState()
         object Updated : CadastroState()
+        object Deleted : CadastroState()
     }
 
     companion object {
