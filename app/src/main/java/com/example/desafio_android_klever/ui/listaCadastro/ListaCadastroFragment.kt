@@ -39,7 +39,10 @@ class ListaCadastroFragment : Fragment(R.layout.lista_cadastro_fragment) {
         viewModel.allCadastrosEvent.observe(viewLifecycleOwner) { allCadastros ->
             val listaCadastroAdapter = ListaCadastroAdapter(allCadastros).apply {
                 onItemClick = { cadastro ->
-                    val directions = ListaCadastroFragmentDirections.actionListaCadastroFragmentToCadastroFragment(cadastro)
+                    val directions =
+                        ListaCadastroFragmentDirections.actionListaCadastroFragmentToCadastroFragment(
+                            cadastro
+                        )
                     findNavController().navigateWithAnimations(directions)
 
                 }
@@ -57,9 +60,9 @@ class ListaCadastroFragment : Fragment(R.layout.lista_cadastro_fragment) {
         viewModel.getCadastros()
     }
 
-    private fun configureViewListeners(){
-        btn_adicionar.setOnClickListener{
-            findNavController().navigateWithAnimations(R.id.cadastroFragment)
+    private fun configureViewListeners() {
+        btn_adicionar.setOnClickListener {
+            findNavController().navigateWithAnimations(R.id.action_listaCadastroFragment_to_cadastroFragment)
         }
     }
 }

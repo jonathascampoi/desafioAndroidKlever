@@ -22,6 +22,7 @@
         <argument
             android:name="cadastro"
             app:argType="com.example.desafio_android_klever.data.db.entity.CadastroEntity"
+            android:defaultValue="@null"
             app:nullable="true" />
     </fragment>
 

@@ -8,6 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.desafio_android_klever.R
 import com.example.desafio_android_klever.data.db.AppDatabase
 import com.example.desafio_android_klever.data.db.dao.CadastroDAO
@@ -31,8 +32,17 @@ class CadastroFragment : Fragment(R.layout.cadastro_fragment) {
         }
     }
 
+    private val args: CadastroFragmentArgs by navArgs()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        args.cadastro?.let { cadastro ->
+            botao_criar.text = getString(R.string.text_btn_atualizar)
+            input_name.setText(cadastro.nome)
+            input_email.setText(cadastro.email)
+        }
+
         observeEvents()
         setListners()
     }
@@ -42,7 +52,7 @@ class CadastroFragment : Fragment(R.layout.cadastro_fragment) {
             val nome = input_name.text.toString()
             val email = input_email.text.toString()
             
-            viewModel.addCadastro(nome, email)
+            viewModel.adicionaOuAtualizaCadastro(nome, email, args.cadastro?.id ?: 0)
         }
     }
 
@@ -53,6 +63,11 @@ class CadastroFragment : Fragment(R.layout.cadastro_fragment) {
                     limpaTextos()
                     escondeTeclado()
                     requireView().requestFocus()
+                    findNavController().popBackStack()
+                }
+                is CadastroViewModel.CadastroState.Updated -> {
+                    limpaTextos()
+                    escondeTeclado()
                     findNavController().popBackStack()
                 }
             }

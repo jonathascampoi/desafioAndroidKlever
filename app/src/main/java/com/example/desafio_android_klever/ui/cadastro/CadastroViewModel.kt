@@ -20,7 +20,28 @@ class CadastroViewModel(private val repository: CadastroRepository) : ViewModel(
     val messageEventData: LiveData<Int>
         get() = _messageEventData
 
-    fun addCadastro(nome: String, email: String) = viewModelScope.launch {
+    fun adicionaOuAtualizaCadastro(nome: String, email: String, id: Long = 0) {
+        if (id > 0) {
+            atualizaCadastro(id, nome, email)
+        } else {
+            criarCadastro(nome, email)
+        }
+    }
+
+    private fun atualizaCadastro(id: Long, nome: String, email: String) = viewModelScope.launch {
+        try {
+            repository.updateCadastro(id, nome, email)
+
+            _cadastroStateEventData.value = CadastroState.Updated
+            _messageEventData.value = R.string.cadastro_atualizado_sucesso
+
+        } catch (ex: Exception) {
+            _messageEventData.value = R.string.cadastro_erro_atualizar
+            Log.e(TAG, ex.toString())
+        }
+    }
+
+    private fun criarCadastro(nome: String, email: String) = viewModelScope.launch {
         try {
             val id = repository.insertCadastro(nome, email)
             if (id > 0) {
@@ -35,6 +56,7 @@ class CadastroViewModel(private val repository: CadastroRepository) : ViewModel(
 
     sealed class CadastroState {
         object Inserted : CadastroState()
+        object Updated : CadastroState()
     }
 
     companion object {
