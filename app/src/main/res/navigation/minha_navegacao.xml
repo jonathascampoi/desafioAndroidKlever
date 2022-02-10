@@ -8,12 +8,21 @@
     <fragment
         android:id="@+id/listaCadastroFragment"
         android:name="com.example.desafio_android_klever.ui.listaCadastro.ListaCadastroFragment"
-        android:label="@string/listagem_titulo" />
+        android:label="@string/listagem_titulo" >
+        <action
+            android:id="@+id/action_listaCadastroFragment_to_cadastroFragment"
+            app:destination="@id/cadastroFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/cadastroFragment"
         android:name="com.example.desafio_android_klever.ui.cadastro.CadastroFragment"
         android:label="@string/cadastro_titulo"
-        tools:layout="@layout/cadastro_fragment" />
+        tools:layout="@layout/cadastro_fragment" >
+        <argument
+            android:name="cadastro"
+            app:argType="com.example.desafio_android_klever.data.db.entity.CadastroEntity"
+            app:nullable="true" />
+    </fragment>
 
 </navigation>

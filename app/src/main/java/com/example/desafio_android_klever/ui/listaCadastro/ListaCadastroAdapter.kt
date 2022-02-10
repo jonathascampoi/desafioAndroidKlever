@@ -12,13 +12,19 @@ import kotlinx.android.synthetic.main.cadastro_item.view.*
 class ListaCadastroAdapter(private val cadastros: List<CadastroEntity>) :
     RecyclerView.Adapter<ListaCadastroAdapter.ListaCadastroViewHolder>() {
 
-    class ListaCadastroViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    var onItemClick: ((entity: CadastroEntity) -> Unit)? = null
+
+    inner class ListaCadastroViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val textViewNomeCadastro: TextView = itemView.name_listagem
         private val textViewEmailCadastro: TextView = itemView.email_listagem
 
         fun bindView(cadastro: CadastroEntity) {
             textViewNomeCadastro.text = cadastro.nome
             textViewEmailCadastro.text = cadastro.email
+
+            itemView.setOnClickListener{
+                onItemClick?.invoke(cadastro)
+            }
         }
     }
 

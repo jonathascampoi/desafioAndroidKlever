@@ -37,7 +37,13 @@ class ListaCadastroFragment : Fragment(R.layout.lista_cadastro_fragment) {
 
     private fun observeViewModelEvents() {
         viewModel.allCadastrosEvent.observe(viewLifecycleOwner) { allCadastros ->
-            val listaCadastroAdapter = ListaCadastroAdapter(allCadastros)
+            val listaCadastroAdapter = ListaCadastroAdapter(allCadastros).apply {
+                onItemClick = { cadastro ->
+                    val directions = ListaCadastroFragmentDirections.actionListaCadastroFragmentToCadastroFragment(cadastro)
+                    findNavController().navigateWithAnimations(directions)
+
+                }
+            }
 
             with(recycler_cadastros) {
                 setHasFixedSize(true)
