@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/listaCadastroFragment"
         android:name="com.example.desafio_android_klever.ui.listaCadastro.ListaCadastroFragment"
-        android:label="ListaCadastroFragment" />
+        android:label="@string/listagem_titulo" />
 
     <fragment
         android:id="@+id/cadastroFragment"

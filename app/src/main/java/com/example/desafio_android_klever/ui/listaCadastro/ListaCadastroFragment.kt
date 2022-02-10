@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.desafio_android_klever.R
 import com.example.desafio_android_klever.data.db.AppDatabase
 import com.example.desafio_android_klever.data.db.dao.CadastroDAO
+import com.example.desafio_android_klever.extension.navigateWithAnimations
 import com.example.desafio_android_klever.repository.CadastroRepository
 import com.example.desafio_android_klever.repository.DatabaseSource
 import com.example.desafio_android_klever.ui.cadastro.CadastroViewModel
@@ -47,7 +48,7 @@ class ListaCadastroFragment : Fragment(R.layout.lista_cadastro_fragment) {
 
     private fun configureViewListeners(){
         btn_adicionar.setOnClickListener{
-            findNavController().navigate(R.id.cadastroFragment)
+            findNavController().navigateWithAnimations(R.id.cadastroFragment)
         }
     }
 }

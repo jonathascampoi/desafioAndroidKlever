@@ -5,9 +5,10 @@
     <string name="cadastro_nome_hint">Nome do Usuario</string>
     <string name="cadastro_email_hint">E-mail do Usuario</string>
     <string name="text_btn_criar">Criar</string>
-    <string name="cadastro_titulo">Cadastro</string>
-
-    <!-- mensagens -->
+    <string name="cadastro_titulo">Cadastrar</string>
     <string name="cadastro_inserido_sucesso">Cadastro realizado com Sucesso!</string>
     <string name="cadastro_erro_inserir">Houve um erro ao inserir o Cadastro!</string>
+
+    <!-- Tela de listagem dos Cadastros -->
+    <string name="listagem_titulo">Cadastros</string>
 </resources>
