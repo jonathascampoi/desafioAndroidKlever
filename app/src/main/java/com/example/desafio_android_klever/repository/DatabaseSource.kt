@@ -6,19 +6,46 @@ import com.example.desafio_android_klever.data.db.entity.CadastroEntity
 
 class DatabaseSource(private val cadastroDAO: CadastroDAO) : CadastroRepository {
 
-    override suspend fun insertCadastro(nome: String, email: String): Long {
+    override suspend fun insertCadastro(
+        nome: String,
+        email: String,
+        cep: String,
+        estado: String,
+        cidade: String,
+        bairro: String,
+        rua: String
+    ): Long {
         val cadastro = CadastroEntity(
             nome = nome,
-            email = email
+            email = email,
+            cep = cep,
+            estado = estado,
+            cidade = cidade,
+            bairro = bairro,
+            rua = rua
         )
         return cadastroDAO.insert(cadastro)
     }
 
-    override suspend fun updateCadastro(id: Long, nome: String, email: String) {
+    override suspend fun updateCadastro(
+        id: Long,
+        nome: String,
+        email: String,
+        cep: String,
+        estado: String,
+        cidade: String,
+        bairro: String,
+        rua: String
+    ) {
         val cadastro = CadastroEntity(
             id = id,
             nome = nome,
-            email = email
+            email = email,
+            cep = cep,
+            estado = estado,
+            cidade = cidade,
+            bairro = bairro,
+            rua = rua
         )
         cadastroDAO.update(cadastro)
     }

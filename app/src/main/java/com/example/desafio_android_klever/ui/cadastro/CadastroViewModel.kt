@@ -20,17 +20,35 @@ class CadastroViewModel(private val repository: CadastroRepository) : ViewModel(
     val messageEventData: LiveData<Int>
         get() = _messageEventData
 
-    fun adicionaOuAtualizaCadastro(nome: String, email: String, id: Long = 0) {
+    fun adicionaOuAtualizaCadastro(
+        nome: String,
+        email: String,
+        id: Long = 0,
+        cep: String,
+        estado: String,
+        cidade: String,
+        bairro: String,
+        rua: String
+    ) {
         if (id > 0) {
-            atualizaCadastro(id, nome, email)
+            atualizaCadastro(id, nome, email, cep, estado, cidade, bairro, rua)
         } else {
-            criarCadastro(nome, email)
+            criarCadastro(nome, email, cep, estado, cidade, bairro, rua)
         }
     }
 
-    private fun atualizaCadastro(id: Long, nome: String, email: String) = viewModelScope.launch {
+    private fun atualizaCadastro(
+        id: Long,
+        nome: String,
+        email: String,
+        cep: String,
+        estado: String,
+        cidade: String,
+        bairro: String,
+        rua: String
+    ) = viewModelScope.launch {
         try {
-            repository.updateCadastro(id, nome, email)
+            repository.updateCadastro(id, nome, email, cep, estado, cidade, bairro, rua)
 
             _cadastroStateEventData.value = CadastroState.Updated
             _messageEventData.value = R.string.cadastro_atualizado_sucesso
@@ -41,9 +59,17 @@ class CadastroViewModel(private val repository: CadastroRepository) : ViewModel(
         }
     }
 
-    private fun criarCadastro(nome: String, email: String) = viewModelScope.launch {
+    private fun criarCadastro(
+        nome: String,
+        email: String,
+        cep: String,
+        estado: String,
+        cidade: String,
+        bairro: String,
+        rua: String
+    ) = viewModelScope.launch {
         try {
-            val id = repository.insertCadastro(nome, email)
+            val id = repository.insertCadastro(nome, email, cep, estado, cidade, bairro, rua)
             if (id > 0) {
                 _cadastroStateEventData.value = CadastroState.Inserted
                 _messageEventData.value = R.string.cadastro_inserido_sucesso

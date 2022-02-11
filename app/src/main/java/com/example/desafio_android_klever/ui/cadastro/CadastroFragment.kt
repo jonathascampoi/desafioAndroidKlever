@@ -57,39 +57,58 @@ class CadastroFragment : Fragment(R.layout.cadastro_fragment) {
         botao_criar.setOnClickListener {
             val nome = input_name.text.toString()
             val email = input_email.text.toString()
+            val cep = input_cep.text.toString()
+            val estado = input_estado.text.toString()
+            val cidade = input_cidade.text.toString()
+            val bairro = input_bairro.text.toString()
+            val rua = input_rua.text.toString()
 
-            viewModel.adicionaOuAtualizaCadastro(nome, email, args.cadastro?.id ?: 0)
+            viewModel.adicionaOuAtualizaCadastro(
+                nome,
+                email,
+                args.cadastro?.id ?: 0,
+                cep,
+                estado,
+                cidade,
+                bairro,
+                rua
+            )
         }
 
         botao_deletar.setOnClickListener {
             viewModel.deletarCadastro(args.cadastro?.id ?: 0)
         }
 
-        input_name.addTextChangedListener(object:TextWatcher {
+        input_name.addTextChangedListener(object : TextWatcher {
 
             override fun afterTextChanged(nome: Editable?) {
                 val content = nome.toString()
-                input_name.error = if (content.length >= 4) null else getString(R.string.validacao_nome)
+                input_name.error =
+                    if (content.length >= 4) null else getString(R.string.validacao_nome)
                 botao_criar.isEnabled = input_name.error === null
             }
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { }
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
         })
 
-        input_email.addTextChangedListener(object:TextWatcher {
+        input_email.addTextChangedListener(object : TextWatcher {
 
             override fun afterTextChanged(email: Editable?) {
                 val content = email.toString()
-                input_email.error = if (android.util.Patterns.EMAIL_ADDRESS.matcher(content).matches()) null else getString(R.string.validacao_email)
+                input_email.error = if (android.util.Patterns.EMAIL_ADDRESS.matcher(content)
+                        .matches()
+                ) null else getString(R.string.validacao_email)
                 botao_criar.isEnabled = input_email.error === null
             }
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { }
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
         })
 
-        input_cep.addTextChangedListener(object:TextWatcher {
+        input_cep.addTextChangedListener(object : TextWatcher {
 
             override fun afterTextChanged(cep: Editable?) {
                 val content = cep.toString()
@@ -113,8 +132,9 @@ class CadastroFragment : Fragment(R.layout.cadastro_fragment) {
                 }
 
             }
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { }
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
         })
     }

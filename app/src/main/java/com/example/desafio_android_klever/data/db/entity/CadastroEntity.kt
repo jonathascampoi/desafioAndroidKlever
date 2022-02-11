@@ -11,5 +11,10 @@ class CadastroEntity (
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
     val nome: String,
-    val email: String
+    val email: String,
+    val cep: String,
+    val estado: String,
+    val cidade: String,
+    val bairro: String,
+    val rua: String
 ): Parcelable

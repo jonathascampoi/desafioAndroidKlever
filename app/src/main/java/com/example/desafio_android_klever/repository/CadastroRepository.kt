@@ -5,9 +5,26 @@ import com.example.desafio_android_klever.data.db.entity.CadastroEntity
 
 interface CadastroRepository {
 
-    suspend fun insertCadastro(nome: String, email: String): Long
+    suspend fun insertCadastro(
+        nome: String,
+        email: String,
+        cep: String,
+        estado: String,
+        cidade: String,
+        bairro: String,
+        rua: String
+    ): Long
 
-    suspend fun updateCadastro(id: Long, nome: String, email: String)
+    suspend fun updateCadastro(
+        id: Long,
+        nome: String,
+        email: String,
+        cep: String,
+        estado: String,
+        cidade: String,
+        bairro: String,
+        rua: String
+    )
 
     suspend fun deleteCadastro(id: Long)
 
