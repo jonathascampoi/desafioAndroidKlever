@@ -66,6 +66,7 @@ class CadastroFragment : Fragment(R.layout.cadastro_fragment) {
             override fun afterTextChanged(nome: Editable?) {
                 val content = nome.toString()
                 input_name.error = if (content.length >= 4) null else getString(R.string.validacao_nome)
+                botao_criar.isEnabled = input_name.error === null
             }
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { }
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { }
@@ -77,6 +78,7 @@ class CadastroFragment : Fragment(R.layout.cadastro_fragment) {
             override fun afterTextChanged(email: Editable?) {
                 val content = email.toString()
                 input_email.error = if (android.util.Patterns.EMAIL_ADDRESS.matcher(content).matches()) null else getString(R.string.validacao_email)
+                botao_criar.isEnabled = input_email.error === null
             }
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { }
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { }
