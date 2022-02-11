@@ -1,6 +1,8 @@
 package com.example.desafio_android_klever.ui.cadastro
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -58,6 +60,28 @@ class CadastroFragment : Fragment(R.layout.cadastro_fragment) {
         botao_deletar.setOnClickListener {
             viewModel.deletarCadastro(args.cadastro?.id ?: 0)
         }
+
+        input_name.addTextChangedListener(object:TextWatcher {
+
+            override fun afterTextChanged(nome: Editable?) {
+                val content = nome.toString()
+                input_name.error = if (content.length >= 4) null else getString(R.string.validacao_nome)
+            }
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { }
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { }
+
+        })
+
+        input_email.addTextChangedListener(object:TextWatcher {
+
+            override fun afterTextChanged(email: Editable?) {
+                val content = email.toString()
+                input_email.error = if (android.util.Patterns.EMAIL_ADDRESS.matcher(content).matches()) null else getString(R.string.validacao_email)
+            }
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { }
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { }
+
+        })
     }
 
     private fun observeEvents() {

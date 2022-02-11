@@ -14,6 +14,8 @@
     <string name="cadastro_erro_inserir">Houve um erro ao inserir o Cadastro!</string>
     <string name="cadastro_erro_atualizar">Houve um erro ao atualizar o Cadastro!</string>
     <string name="cadastro_erro_deletar">Houve um erro ao atualizar o Cadastro!</string>
+    <string name="validacao_email">Insira um endereço de email valido!</string>
+    <string name="validacao_nome">4 letras no minimo!</string>
 
     <!-- Tela de listagem dos Cadastros -->
     <string name="listagem_titulo">Cadastros</string>
