@@ -4,6 +4,11 @@
     <!-- Tela de Cadastro -->
     <string name="cadastro_nome_hint">Nome do Usuario</string>
     <string name="cadastro_email_hint">E-mail do Usuario</string>
+    <string name="cadastro_cep_hint">CEP do Usuario</string>
+    <string name="cadastro_estado_hint">Estado</string>
+    <string name="cadastro_cidade_hint">Cidade</string>
+    <string name="cadastro_bairro_hint">Bairro</string>
+    <string name="cadastro_rua_hint">Rua</string>
     <string name="text_btn_criar">Criar</string>
     <string name="text_btn_atualizar">Atualizar</string>
     <string name="text_btn_deletar">Deletar</string>
@@ -16,6 +21,7 @@
     <string name="cadastro_erro_deletar">Houve um erro ao atualizar o Cadastro!</string>
     <string name="validacao_email">Insira um endereço de email valido!</string>
     <string name="validacao_nome">4 letras no minimo!</string>
+
 
     <!-- Tela de listagem dos Cadastros -->
     <string name="listagem_titulo">Cadastros</string>

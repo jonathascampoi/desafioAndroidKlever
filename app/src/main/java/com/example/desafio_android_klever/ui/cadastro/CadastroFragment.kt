@@ -17,8 +17,12 @@ import com.example.desafio_android_klever.data.db.dao.CadastroDAO
 import com.example.desafio_android_klever.extensions.hideKeyboard
 import com.example.desafio_android_klever.repository.CadastroRepository
 import com.example.desafio_android_klever.repository.DatabaseSource
+import com.example.desafio_android_klever.services.HttpService
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.cadastro_fragment.*
+import java.util.regex.Matcher
+import java.util.regex.Pattern
+
 
 class CadastroFragment : Fragment(R.layout.cadastro_fragment) {
 
@@ -84,14 +88,44 @@ class CadastroFragment : Fragment(R.layout.cadastro_fragment) {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { }
 
         })
+
+        input_cep.addTextChangedListener(object:TextWatcher {
+
+            override fun afterTextChanged(cep: Editable?) {
+                val content = cep.toString()
+//                input_cep.error = if (content.length >= 4) null else getString(R.string.validacao_nome)
+                val pattern_zipcode: Pattern =
+                    Pattern.compile("(^\\d{5}-\\d{3}|^\\d{2}.\\d{3}-\\d{3}|\\d{8})")
+                val matcher: Matcher = pattern_zipcode.matcher(content)
+                if (content == "") {
+                    input_cep.error = "O campo não pode estar vazio"
+                    botao_criar.isEnabled = input_cep.error === null
+                }
+                if (!matcher.matches()) {
+                    input_cep.error = "Informe um CEP válido"
+                    botao_criar.isEnabled = input_cep.error === null
+                } else {
+                    val retorno = HttpService(content).execute().get()
+                    input_estado.setText(retorno.uf)
+                    input_cidade.setText(retorno.localidade)
+                    input_bairro.setText(retorno.bairro)
+                    input_rua.setText(retorno.logradouro)
+                }
+
+            }
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { }
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { }
+
+        })
     }
 
     private fun observeEvents() {
         viewModel.cadastroStateEventData.observe(viewLifecycleOwner) { cadastroState ->
             when (cadastroState) {
-                is CadastroViewModel.CadastroState.Inserted ,
+                is CadastroViewModel.CadastroState.Inserted,
                 is CadastroViewModel.CadastroState.Updated,
-                is CadastroViewModel.CadastroState.Deleted,-> {
+                is CadastroViewModel.CadastroState.Deleted,
+                -> {
                     limpaTextos()
                     escondeTeclado()
                     requireView().requestFocus()
