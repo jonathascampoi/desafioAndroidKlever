@@ -21,7 +21,8 @@
     <string name="cadastro_erro_deletar">Houve um erro ao atualizar o Cadastro!</string>
     <string name="validacao_email">Insira um endereço de email valido!</string>
     <string name="validacao_nome">4 letras no minimo!</string>
-
+    <string name="validacao_cep_vazio">O campo não pode estar vazio!</string>
+    <string name="validacao_cep">Informe um CEP válido!</string>
 
     <!-- Tela de listagem dos Cadastros -->
     <string name="listagem_titulo">Cadastros</string>

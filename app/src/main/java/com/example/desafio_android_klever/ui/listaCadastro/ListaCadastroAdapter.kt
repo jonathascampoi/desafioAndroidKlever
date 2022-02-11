@@ -19,7 +19,7 @@ class ListaCadastroAdapter(private val cadastros: List<CadastroEntity>) :
         private val textViewEmailCadastro: TextView = itemView.email_listagem
 
         fun bindView(cadastro: CadastroEntity) {
-            textViewNomeCadastro.text = cadastro.nome
+            textViewNomeCadastro.text = cadastro.nome + "    " + cadastro.cidade+"/"+cadastro.estado
             textViewEmailCadastro.text = cadastro.email
 
             itemView.setOnClickListener{

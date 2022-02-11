@@ -41,6 +41,7 @@ class CadastroFragment : Fragment(R.layout.cadastro_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        botao_criar.isEnabled = liberaCriar()
         args.cadastro?.let { cadastro ->
             botao_criar.text = getString(R.string.text_btn_atualizar)
             input_name.setText(cadastro.nome)
@@ -85,7 +86,7 @@ class CadastroFragment : Fragment(R.layout.cadastro_fragment) {
                 val content = nome.toString()
                 input_name.error =
                     if (content.length >= 4) null else getString(R.string.validacao_nome)
-                botao_criar.isEnabled = input_name.error === null
+                botao_criar.isEnabled = liberaCriar()
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
@@ -100,7 +101,7 @@ class CadastroFragment : Fragment(R.layout.cadastro_fragment) {
                 input_email.error = if (android.util.Patterns.EMAIL_ADDRESS.matcher(content)
                         .matches()
                 ) null else getString(R.string.validacao_email)
-                botao_criar.isEnabled = input_email.error === null
+                botao_criar.isEnabled = liberaCriar()
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
@@ -112,23 +113,23 @@ class CadastroFragment : Fragment(R.layout.cadastro_fragment) {
 
             override fun afterTextChanged(cep: Editable?) {
                 val content = cep.toString()
-//                input_cep.error = if (content.length >= 4) null else getString(R.string.validacao_nome)
                 val pattern_zipcode: Pattern =
                     Pattern.compile("(^\\d{5}-\\d{3}|^\\d{2}.\\d{3}-\\d{3}|\\d{8})")
                 val matcher: Matcher = pattern_zipcode.matcher(content)
                 if (content == "") {
-                    input_cep.error = "O campo não pode estar vazio"
-                    botao_criar.isEnabled = input_cep.error === null
+                    input_cep.error = getString(R.string.validacao_cep_vazio)
+                    botao_criar.isEnabled = liberaCriar()
                 }
                 if (!matcher.matches()) {
-                    input_cep.error = "Informe um CEP válido"
-                    botao_criar.isEnabled = input_cep.error === null
+                    input_cep.error = getString(R.string.validacao_cep)
+                    botao_criar.isEnabled = liberaCriar()
                 } else {
                     val retorno = HttpService(content).execute().get()
                     input_estado.setText(retorno.uf)
                     input_cidade.setText(retorno.localidade)
                     input_bairro.setText(retorno.bairro)
                     input_rua.setText(retorno.logradouro)
+                    botao_criar.isEnabled = liberaCriar()
                 }
 
             }
@@ -137,6 +138,16 @@ class CadastroFragment : Fragment(R.layout.cadastro_fragment) {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
         })
+    }
+
+    private fun liberaCriar():Boolean{
+        if(input_cep.error === null && input_cep.text.toString() != ""
+            && input_email.error === null && input_email.text.toString() != ""
+            && input_name.error === null && input_name.text.toString() != ""){
+            return true
+        } else{
+            return false
+        }
     }
 
     private fun observeEvents() {
